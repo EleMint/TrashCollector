@@ -28,6 +28,8 @@ namespace TrashCollector.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                         AddressID = c.Int(nullable: false),
+                        Owe = c.Int(nullable: false),
+                        Payment = c.Int(nullable: false)
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Addresses", t => t.AddressID, cascadeDelete: true)
