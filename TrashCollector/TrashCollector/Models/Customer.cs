@@ -17,6 +17,7 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         [ForeignKey("Address")]
         [Display(Name = "Address")]
+        public int AddressID { get; set; }
         public Address Address { get; set; }
     }
 }
