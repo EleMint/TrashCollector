@@ -11,9 +11,12 @@ namespace TrashCollector.Models
     {
         [Key]
         public int ID { get; set; }
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [ForeignKey("Address")]
+        [Display(Name = "Address")]
         public Address Address { get; set; }
     }
 }
