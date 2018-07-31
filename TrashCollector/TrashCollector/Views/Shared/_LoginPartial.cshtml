@@ -6,14 +6,14 @@
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
-
-            <ul class="nav navbar-nav navbar-left">
-                <li>@Html.ActionLink("Im a Customer", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-            </ul>
+            <div class="navbar-header">
+                @Html.ActionLink("Trash Collector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
             <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Schedule/Delay", "PickUps", "Customer")</li>
+                @*<li>@Html.ActionLink("Pay", "Pay", "Customer")</li>*@
                 <li>
-                    @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Edit", "Customers", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>
@@ -24,15 +24,13 @@
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
-
-            <ul class="nav navbar-nav navbar-left">
-                <li>@Html.ActionLink("My Pick Ups", "PickUps", "Employee")</li>
-                <li>@Html.ActionLink("Confirm Pick Up", "Confirm", "Employee")</li>
-                @*<li>@Html.ActionLink("")</li>*@
-            </ul>
+            <div class="navbar-header">
+                @Html.ActionLink("Trash Collector", "PickUps", "Employees", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
             <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("My Pick Ups", "PickUps", "Employees")</li>
                 <li>
-                    @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Edit", "Employees", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>
@@ -41,11 +39,12 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-left">
+    <div class="navbar-header">
+        @Html.ActionLink("Trash Collector", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
+    <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("About", "About", "Home")</li>
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>

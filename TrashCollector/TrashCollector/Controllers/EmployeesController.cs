@@ -63,7 +63,7 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             Employee employee = db.Employees.Find(id);
             if (employee == null)

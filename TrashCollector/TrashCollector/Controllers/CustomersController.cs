@@ -39,7 +39,6 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1");
             return View();
         }
 
@@ -99,7 +98,7 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             Customer customer = db.Customers.Find(id);
             if (customer == null)
