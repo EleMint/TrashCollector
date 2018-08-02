@@ -1,8 +1,60 @@
-﻿
+﻿@using Newtonsoft.Json.Linq;
+@*@model TrashCollector.Models.Customer*@
+
+
 @{
     ViewBag.Title = "PickUp";
 }
 
 <h2>PickUp</h2>
 
-@* GOOGLE API *@
+@using (WebClient wc = new WebClient())
+{
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=N84W21267+Menomonee+Ave,+Menomonee+Falls,+Wisconsin";
+    //string[] Address = Model.Address.Address1.Split(' ');
+    //string address = String.Join("+", Address);
+    //string[] City = Model.Address.City.Split(' ');
+    //string city = String.Join("+", City);
+    //string state = Model.Address.State;
+    //string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+    //url += address + ",+";
+    //url += city + ",+";
+    //url += state;
+    url += "&key=" + Keys.GOOGLE_API_KEY;
+    var jsonStr = wc.DownloadString(url);
+    var url2 = "https://maps.googleapis.com/maps/api/js?key=" + Keys.GOOGLE_API_KEY;
+    var jObject = JObject.Parse(jsonStr);
+    var lat = double.Parse(jObject.First.First.First.First.Next.Next.First.First.First.First.First.ToString());
+    var lng = double.Parse(jObject.First.First.First.First.Next.Next.First.First.First.Last.First.ToString());
+    <div id="map"></div>
+    
+    <style type="text/css">
+        #map {
+            width: 1150px;
+            height: 500px;
+        }
+    </style>
+    <script type="text/javascript"
+            src=@url2></script>
+    <script type="text/javascript">
+        (function () {
+            window.onload = function () {
+                var latlng = new google.maps.LatLng(@lat, @lng);
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: latlng
+                });
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    title: 'Location',
+                    visible: true
+                });
+                marker.setMap(map);
+            }
+        })();
+    </script>
+    <p>
+        @Html.ActionLink("Back To Customers", "PickUps", "Employees") |
+        @Html.ActionLink("Confirm Pick Up", "ConfirmPickUp", "Employees", new { id = Model.ID })
+    </p>
+}

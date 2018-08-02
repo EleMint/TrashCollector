@@ -14,10 +14,28 @@ namespace TrashCollector.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Employees
-        public ActionResult Index()
+        // PickUps
+        public ActionResult PickUps(int id)
         {
-            return View(db.Employees.ToList());
+
+            var employeeZip = db.Employees.Where(e => e.ID == id).Select(s => s.ZipCode).First();
+            var customersInZip = db.Customers.Where(c => c.Address.Zipcode == employeeZip);
+            return View("Index", customersInZip);
+        }
+        // PickUp
+        public ActionResult PickUp(Customer customer)
+        {
+            return View(customer);
+        }
+        public ActionResult ConfirmPickUp(int id)
+        {
+            var employeeId = 123;
+            return View("PickUps", employeeId);
+        }
+        // GET: Employees
+        public ActionResult Index(List<Customer> customers)
+        {
+            return View(customers);
         }
 
         // GET: Employees/Details/5

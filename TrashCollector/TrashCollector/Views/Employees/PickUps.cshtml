@@ -1,9 +1,23 @@
-﻿@model TrashCollector.Models.Employee
+﻿@model IEnumerable<TrashCollector.Models.Customer>
 
 @{
     ViewBag.Title = "PickUps";
 }
 
-<h2>PickUps</h2>
+<h2>Zip Code Pick Ups</h2>
 
-@*Google Maps API*@
+@foreach (var customer in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => customer.FirstName + customer.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => customer.Address.Address1)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "PickUp", "Employees", new { id = customer.ID }) |
+            @Html.ActionLink("Confirm PickUp", "Delete", "", new { id = customer.ID })
+        </td>
+    </tr>
+}

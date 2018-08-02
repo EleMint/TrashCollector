@@ -210,10 +210,23 @@
     <Compile Include="Migrations\201807261518145_initalmigration.Designer.cs">
       <DependentUpon>201807261518145_initalmigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807311553068_CustomerPickUp.cs" />
+    <Compile Include="Migrations\201807311553068_CustomerPickUp.Designer.cs">
+      <DependentUpon>201807311553068_CustomerPickUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808011334333_Email.cs" />
+    <Compile Include="Migrations\201808011334333_Email.Designer.cs">
+      <DependentUpon>201808011334333_Email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808011336202_employeeEmail.cs" />
+    <Compile Include="Migrations\201808011336202_employeeEmail.Designer.cs">
+      <DependentUpon>201808011336202_employeeEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerAddressViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -299,6 +312,7 @@
     <Content Include="Views\Employees\PickUps.cshtml" />
     <Content Include="Views\Employees\Confirm.cshtml" />
     <Content Include="Views\Employees\PickUp.cshtml" />
+    <Content Include="Views\Customers\PickUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +333,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807261518145_initalmigration.resx">
       <DependentUpon>201807261518145_initalmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311553068_CustomerPickUp.resx">
+      <DependentUpon>201807311553068_CustomerPickUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808011334333_Email.resx">
+      <DependentUpon>201808011334333_Email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808011336202_employeeEmail.resx">
+      <DependentUpon>201808011336202_employeeEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

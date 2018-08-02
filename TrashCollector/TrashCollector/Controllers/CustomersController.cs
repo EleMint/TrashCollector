@@ -20,7 +20,10 @@ namespace TrashCollector.Controllers
             var customers = db.Customers.Include(c => c.Address);
             return View(customers.ToList());
         }
-
+        public ActionResult PickUp()
+        {
+            return RedirectToAction("Index");
+        }
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
@@ -41,31 +44,30 @@ namespace TrashCollector.Controllers
         {
             return View();
         }
-
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,AddressID")] Customer customer)
+        public ActionResult Create(CustomerAddressViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                db.Addresses.Add(model.Address);
+                db.Customers.Add(model.Customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1", customer.AddressID);
-            return View(customer);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1", model.Customer.AddressID);
+            return View(model.Customer);
         }
-
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             Customer customer = db.Customers.Find(id);
             if (customer == null)
